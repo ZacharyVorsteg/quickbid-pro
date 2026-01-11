@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { AppLayout } from '@/components/layout';
 import { Button, Input, Textarea } from '@/components/ui';
-import { Building2, CreditCard, Bell, Shield, User, Save } from 'lucide-react';
+import { Building2, CreditCard, Bell, Shield, User, Save, Check } from 'lucide-react';
 import { createClient } from '@/lib/supabase';
 import { Profile, Trade } from '@/lib/database.types';
 import { tradeLabels } from '@/lib/materials-data';
@@ -292,20 +292,20 @@ export default function SettingsPage() {
                     <h3 className="font-medium text-gray-900">Plan Features</h3>
                     <ul className="space-y-2 text-sm text-gray-600">
                       <li className="flex items-center gap-2">
-                        <span className="text-green-500">Check</span> Unlimited
-                        estimates
+                        <Check className="w-4 h-4 text-green-500 flex-shrink-0" />
+                        Unlimited estimates
                       </li>
                       <li className="flex items-center gap-2">
-                        <span className="text-green-500">Check</span> Full
-                        material database
+                        <Check className="w-4 h-4 text-green-500 flex-shrink-0" />
+                        Full material database
                       </li>
                       <li className="flex items-center gap-2">
-                        <span className="text-green-500">Check</span> PDF
-                        generation
+                        <Check className="w-4 h-4 text-green-500 flex-shrink-0" />
+                        PDF generation
                       </li>
                       <li className="flex items-center gap-2">
-                        <span className="text-green-500">Check</span> Priority
-                        support
+                        <Check className="w-4 h-4 text-green-500 flex-shrink-0" />
+                        Priority support
                       </li>
                     </ul>
                   </div>
