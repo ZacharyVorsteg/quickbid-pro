@@ -107,8 +107,8 @@ export function ROICalculator() {
 
             <div className="space-y-6">
               {/* Hours saved */}
-              <div className="flex items-center gap-4 p-4 bg-blue-50 rounded-xl">
-                <div className="flex items-center justify-center w-12 h-12 bg-blue-500 rounded-xl">
+              <div className="flex items-center gap-4 p-4 bg-primary-50 rounded-xl">
+                <div className="flex items-center justify-center w-12 h-12 bg-primary-600 rounded-xl">
                   <Clock className="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -120,8 +120,8 @@ export function ROICalculator() {
               </div>
 
               {/* Money saved monthly */}
-              <div className="flex items-center gap-4 p-4 bg-green-50 rounded-xl">
-                <div className="flex items-center justify-center w-12 h-12 bg-green-500 rounded-xl">
+              <div className="flex items-center gap-4 p-4 bg-primary-50 rounded-xl">
+                <div className="flex items-center justify-center w-12 h-12 bg-primary-600 rounded-xl">
                   <DollarSign className="w-6 h-6 text-white" />
                 </div>
                 <div>
@@ -135,8 +135,8 @@ export function ROICalculator() {
               </div>
 
               {/* Yearly savings */}
-              <div className="flex items-center gap-4 p-4 bg-purple-50 rounded-xl">
-                <div className="flex items-center justify-center w-12 h-12 bg-purple-500 rounded-xl">
+              <div className="flex items-center gap-4 p-4 bg-primary-50 rounded-xl">
+                <div className="flex items-center justify-center w-12 h-12 bg-primary-600 rounded-xl">
                   <TrendingUp className="w-6 h-6 text-white" />
                 </div>
                 <div>

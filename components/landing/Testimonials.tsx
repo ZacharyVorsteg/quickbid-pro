@@ -42,10 +42,10 @@ const testimonials = [
 ];
 
 const tradeColors: Record<string, string> = {
-  hvac: 'border-blue-500',
-  plumbing: 'border-emerald-500',
-  electrical: 'border-amber-500',
-  roofing: 'border-purple-500',
+  hvac: 'border-primary-500',
+  plumbing: 'border-primary-500',
+  electrical: 'border-primary-500',
+  roofing: 'border-primary-500',
 };
 
 export function Testimonials() {
