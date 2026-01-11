@@ -50,10 +50,9 @@ export async function GET(
   });
 
   try {
-    // Generate PDF
-    const pdfBuffer = await renderToBuffer(
-      React.createElement(EstimatePDF, { data: pdfData }) as any
-    );
+    // Generate PDF - Cast to ReactElement for react-pdf compatibility
+    const pdfElement = React.createElement(EstimatePDF, { data: pdfData }) as React.ReactElement;
+    const pdfBuffer = await renderToBuffer(pdfElement);
 
     // Generate filename
     const filename = generatePDFFilename(

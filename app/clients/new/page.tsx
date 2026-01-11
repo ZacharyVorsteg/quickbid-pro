@@ -7,6 +7,7 @@ import { AppLayout } from '@/components/layout';
 import { Button, Input, Textarea } from '@/components/ui';
 import { ArrowLeft } from 'lucide-react';
 import { createClient } from '@/lib/supabase';
+import { ClientInsert } from '@/lib/database.types';
 import { useToast } from '@/contexts/ToastContext';
 
 export default function NewClientPage() {
@@ -37,14 +38,16 @@ export default function NewClientPage() {
       } = await supabase.auth.getUser();
       if (!user) throw new Error('Not authenticated');
 
-      const { error } = await supabase.from('clients').insert({
+      const clientData: ClientInsert = {
         user_id: user.id,
         name: formData.name,
         email: formData.email || null,
         phone: formData.phone || null,
         address: formData.address || null,
         notes: formData.notes || null,
-      } as any);
+      };
+      // Type assertion needed due to Supabase client generic inference
+      const { error } = await supabase.from('clients').insert(clientData as never);
 
       if (error) throw error;
 

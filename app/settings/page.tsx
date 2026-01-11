@@ -6,7 +6,7 @@ import { AppLayout } from '@/components/layout';
 import { Button, Input, Textarea } from '@/components/ui';
 import { Building2, CreditCard, Bell, Shield, User, Save, Check } from 'lucide-react';
 import { createClient } from '@/lib/supabase';
-import { Profile, Trade } from '@/lib/database.types';
+import { Profile, Trade, ProfileUpdate } from '@/lib/database.types';
 import { tradeLabels } from '@/lib/materials-data';
 import { useToast } from '@/contexts/ToastContext';
 
@@ -65,18 +65,20 @@ export default function SettingsPage() {
     if (!profile) return;
     setIsSaving(true);
 
-    const { error } = await (supabase
-      .from('profiles') as any)
-      .update({
-        company_name: formData.company_name,
-        phone: formData.phone,
-        address: formData.address,
-        default_markup: formData.default_markup,
-        default_labor_rate: formData.default_labor_rate,
-        tax_rate: formData.tax_rate,
-        payment_terms: formData.payment_terms,
-        trade: formData.trade,
-      })
+    const updateData: ProfileUpdate = {
+      company_name: formData.company_name,
+      phone: formData.phone,
+      address: formData.address,
+      default_markup: formData.default_markup,
+      default_labor_rate: formData.default_labor_rate,
+      tax_rate: formData.tax_rate,
+      payment_terms: formData.payment_terms,
+      trade: formData.trade,
+    };
+    // Type assertion needed due to Supabase client generic inference
+    const { error } = await supabase
+      .from('profiles')
+      .update(updateData as never)
       .eq('id', profile.id);
 
     if (!error) {

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Search, Plus, User, MapPin, Phone, Mail } from 'lucide-react';
 import { createClient } from '@/lib/supabase';
-import { Client } from '@/lib/database.types';
+import { Client, ClientInsert } from '@/lib/database.types';
 import { Input, Button } from '@/components/ui';
 
 interface ClientStepProps {
@@ -61,15 +61,17 @@ export function ClientStep({
     } = await supabase.auth.getUser();
     if (!user) return;
 
+    const clientData: ClientInsert = {
+      user_id: user.id,
+      name: newClient.name,
+      email: newClient.email || null,
+      phone: newClient.phone || null,
+      address: newClient.address || null,
+    };
+    // Type assertion needed due to Supabase client generic inference
     const { data, error } = await supabase
       .from('clients')
-      .insert({
-        user_id: user.id,
-        name: newClient.name,
-        email: newClient.email || null,
-        phone: newClient.phone || null,
-        address: newClient.address || null,
-      } as any)
+      .insert(clientData as never)
       .select()
       .single();
 

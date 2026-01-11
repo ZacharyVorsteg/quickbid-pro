@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { CheckCircle } from 'lucide-react';
 import { createClient } from '@/lib/supabase';
-import { Client, Profile } from '@/lib/database.types';
+import { Client, Profile, EstimateInsert, EstimateItemInsert, Estimate } from '@/lib/database.types';
 import { ClientStep } from './ClientStep';
 import { LineItemsStep, LineItem } from './LineItemsStep';
 import { ReviewStep } from './ReviewStep';
@@ -57,47 +57,50 @@ export function EstimateWizard({ profile }: EstimateWizardProps) {
       const total = subtotalWithMarkup + tax;
 
       // Create estimate
+      const estimateData: EstimateInsert = {
+        user_id: user.id,
+        client_id: selectedClient.id,
+        job_address: jobAddress || selectedClient.address,
+        status,
+        subtotal: subtotalWithMarkup,
+        tax,
+        total,
+        notes,
+        valid_until: validUntil,
+        sent_at: status === 'sent' ? new Date().toISOString() : null,
+      };
+      // Type assertion needed due to Supabase client generic inference
       const { data: estimate, error: estimateError } = await supabase
         .from('estimates')
-        .insert({
-          user_id: user.id,
-          client_id: selectedClient.id,
-          job_address: jobAddress || selectedClient.address,
-          status,
-          subtotal: subtotalWithMarkup,
-          tax,
-          total,
-          notes,
-          valid_until: validUntil,
-          sent_at: status === 'sent' ? new Date().toISOString() : null,
-        } as any)
+        .insert(estimateData as never)
         .select()
         .single();
 
       if (estimateError) throw estimateError;
 
       // Create line items
-      if (estimate && items.length > 0) {
+      const createdEstimate = estimate as Estimate;
+      if (createdEstimate && items.length > 0) {
+        const itemsData: EstimateItemInsert[] = items.map((item, index) => ({
+          estimate_id: createdEstimate.id,
+          type: item.type,
+          description: item.description,
+          quantity: item.quantity,
+          unit: item.unit,
+          unit_price: item.unit_price,
+          total: item.total,
+          sort_order: index,
+        }));
+        // Type assertion needed due to Supabase client generic inference
         const { error: itemsError } = await supabase
           .from('estimate_items')
-          .insert(
-            items.map((item, index) => ({
-              estimate_id: (estimate as any).id,
-              type: item.type,
-              description: item.description,
-              quantity: item.quantity,
-              unit: item.unit,
-              unit_price: item.unit_price,
-              total: item.total,
-              sort_order: index,
-            })) as any
-          );
+          .insert(itemsData as never);
 
         if (itemsError) throw itemsError;
       }
 
       toast.success('Estimate saved');
-      router.push(`/estimates/${(estimate as any).id}`);
+      router.push(`/estimates/${createdEstimate.id}`);
     } catch {
       toast.error('Error saving estimate. Please try again.');
     } finally {

@@ -5,7 +5,7 @@ import { AppLayout } from '@/components/layout';
 import { Button, Input, Badge, Modal, ModalFooter } from '@/components/ui';
 import { Plus, Search, Edit, Trash2, Package } from 'lucide-react';
 import { createClient } from '@/lib/supabase';
-import { Material, Trade } from '@/lib/database.types';
+import { Material, Trade, MaterialInsert } from '@/lib/database.types';
 import {
   allMaterials,
   tradeLabels,
@@ -48,14 +48,16 @@ export default function MaterialsPage() {
     } = await supabase.auth.getUser();
     if (!user) return;
 
-    const { error } = await supabase.from('materials').insert({
+    const materialData: MaterialInsert = {
       user_id: user.id,
       name: newMaterial.name,
       unit: newMaterial.unit,
       default_price: newMaterial.default_price,
       trade: newMaterial.trade,
       is_custom: true,
-    } as any);
+    };
+    // Type assertion needed due to Supabase client generic inference
+    const { error } = await supabase.from('materials').insert(materialData as never);
 
     if (!error) {
       toast.success('Material added');

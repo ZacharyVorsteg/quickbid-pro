@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Zap, Mail, Lock, Eye, EyeOff, User, Building2, CheckCircle } from 'lucide-react';
 import { createClient } from '@/lib/supabase';
 import { Button } from '@/components/ui';
-import { Trade } from '@/lib/database.types';
+import { Trade, ProfileInsert } from '@/lib/database.types';
 import { useToast } from '@/contexts/ToastContext';
 
 const trades: { value: Trade; label: string; color: string }[] = [
@@ -53,12 +53,14 @@ export default function SignupPage() {
 
       if (data.user) {
         // Create profile
-        const { error: profileError } = await supabase.from('profiles').insert({
+        const profileData: ProfileInsert = {
           id: data.user.id,
           company_name: companyName,
           trade: trade as Trade,
           subscription_status: 'trial',
-        } as any);
+        };
+        // Type assertion needed due to Supabase client generic inference
+        const { error: profileError } = await supabase.from('profiles').insert(profileData as never);
 
         if (profileError) {
           // Profile creation failed - user can update later
