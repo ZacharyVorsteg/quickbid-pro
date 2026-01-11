@@ -111,23 +111,22 @@ export function Hero() {
                       { name: 'Condensing Unit 3 Ton', qty: 1, price: '$2,800' },
                       { name: 'Air Handler 3 Ton', qty: 1, price: '$2,200' },
                       { name: 'Copper Tubing 3/4"', qty: 50, price: '$337' },
-                      { name: 'Labor - Installation', qty: 8, price: '$600' },
                     ].map((item, index) => (
                       <div
                         key={index}
-                        className="flex items-center justify-between p-3 bg-gray-700/50 rounded-lg"
+                        className="flex items-center justify-between p-2 sm:p-3 bg-gray-700/50 rounded-lg"
                       >
-                        <div className="flex items-center gap-3">
-                          <div className="w-2 h-2 bg-primary-500 rounded-full" />
-                          <span className="text-sm text-gray-200">
+                        <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+                          <div className="w-2 h-2 bg-primary-500 rounded-full flex-shrink-0" />
+                          <span className="text-xs sm:text-sm text-gray-200 truncate">
                             {item.name}
                           </span>
                         </div>
-                        <div className="flex items-center gap-6">
-                          <span className="text-sm text-gray-400">
+                        <div className="flex items-center gap-3 sm:gap-6 flex-shrink-0">
+                          <span className="text-xs sm:text-sm text-gray-400">
                             x{item.qty}
                           </span>
-                          <span className="text-sm font-medium text-white">
+                          <span className="text-xs sm:text-sm font-medium text-white">
                             {item.price}
                           </span>
                         </div>

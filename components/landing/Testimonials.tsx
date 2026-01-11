@@ -63,18 +63,18 @@ export function Testimonials() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 mb-16">
           {[
             { label: 'Active Users', value: '2,000+' },
-            { label: 'Estimates Created', value: '150,000+' },
+            { label: 'Estimates Created', value: '150K+' },
             { label: 'Avg Time Saved', value: '75%' },
             { label: 'Customer Rating', value: '4.9/5' },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
-              <p className="text-3xl sm:text-4xl font-bold text-gray-900">
+              <p className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900">
                 {stat.value}
               </p>
-              <p className="text-gray-600 mt-1">{stat.label}</p>
+              <p className="text-sm sm:text-base text-gray-600 mt-1">{stat.label}</p>
             </div>
           ))}
         </div>
