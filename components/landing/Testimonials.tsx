@@ -55,10 +55,10 @@ export function Testimonials() {
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Trusted by Contractors Nationwide
+            What Contractors Are Saying
           </h2>
           <p className="text-xl text-gray-600">
-            See what other trade professionals are saying about QuickBid Pro.
+            Real results from trade professionals using QuickBid Pro.
           </p>
         </div>
 

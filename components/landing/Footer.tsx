@@ -11,7 +11,6 @@ const footerLinks = {
   ],
   support: [
     { name: 'Contact', href: 'mailto:support@quickbidpro.com' },
-    { name: 'Help Center', href: 'mailto:help@quickbidpro.com' },
   ],
   legal: [
     { name: 'Privacy Policy', href: '/privacy' },
@@ -22,35 +21,7 @@ const footerLinks = {
 export function Footer() {
   return (
     <footer className="bg-gray-900 pb-24">
-      {/* CTA Section */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
-        <div className="bg-gradient-to-r from-primary-600 to-primary-800 rounded-2xl p-8 md:p-12 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-            Ready to Estimate Smarter?
-          </h2>
-          <p className="text-lg text-primary-100 mb-8 max-w-2xl mx-auto">
-            Join 2,000+ contractors who are saving time and winning more jobs
-            with QuickBid Pro.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/signup"
-              className="inline-flex items-center justify-center px-6 py-3 bg-white text-primary-600 font-semibold rounded-lg hover:bg-gray-100 transition-colors"
-            >
-              Start Your Free Trial
-            </Link>
-            <Link
-              href="#demo"
-              className="inline-flex items-center justify-center px-6 py-3 border border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
-            >
-              Watch Demo
-            </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* Links Section */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 border-t border-gray-800">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {/* Logo & description */}
           <div className="col-span-2 md:col-span-1">
@@ -118,8 +89,8 @@ export function Footer() {
         </div>
 
         {/* Bottom */}
-        <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-gray-400 text-sm">
+        <div className="mt-12 pt-8 border-t border-gray-800 text-center">
+          <p className="text-gray-500 text-sm">
             &copy; {new Date().getFullYear()} QuickBid Pro. All rights reserved.
           </p>
         </div>
