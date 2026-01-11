@@ -68,8 +68,7 @@ export async function GET(
         'Content-Disposition': `attachment; filename="${filename}"`,
       },
     });
-  } catch (error) {
-    console.error('PDF generation error:', error);
+  } catch {
     return NextResponse.json(
       { error: 'Failed to generate PDF' },
       { status: 500 }

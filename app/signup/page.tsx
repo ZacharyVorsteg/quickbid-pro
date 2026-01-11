@@ -61,7 +61,7 @@ export default function SignupPage() {
         } as any);
 
         if (profileError) {
-          console.error('Profile creation error:', profileError);
+          // Profile creation failed - user can update later
         }
       }
 

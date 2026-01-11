@@ -98,8 +98,7 @@ export function EstimateWizard({ profile }: EstimateWizardProps) {
 
       toast.success('Estimate saved');
       router.push(`/estimates/${(estimate as any).id}`);
-    } catch (error) {
-      console.error('Error saving estimate:', error);
+    } catch {
       toast.error('Error saving estimate. Please try again.');
     } finally {
       setIsSaving(false);
